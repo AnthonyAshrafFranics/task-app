@@ -10,7 +10,7 @@ import { Tasks } from "./components/Tasks";
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
-
+  const api = "http://localhost:5000/tasks";
   useEffect(() => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks();
@@ -20,20 +20,20 @@ function App() {
   }, []);
   // Fetch Tasks
   const fetchTasks = async () => {
-    const res = await fetch("http://localhost:5000/tasks");
+    const res = await fetch(api);
     const data = await res.json();
     return data;
   };
 
   // Fetch Task
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`);
+    const res = await fetch(`${api}/${id}`);
     const data = await res.json();
     return data;
   };
 
   const addTask = async (task) => {
-    const res = await fetch("http://localhost:5000/tasks", {
+    const res = await fetch(api, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -48,7 +48,7 @@ function App() {
 
   // delete task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, {
+    await fetch(`${api}/${id}`, {
       method: "DELETE",
     });
 
@@ -58,7 +58,7 @@ function App() {
     const taskToToggle = await fetchTask(id);
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
 
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const res = await fetch(`${api}/${id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
