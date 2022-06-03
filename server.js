@@ -6,6 +6,7 @@ const middleware = jsonServer.defaults({
 });
 
 const port = process.env.PORT || 5000;
+
 server.use(middleware);
 server.use(
   jsonServer.rewriter({
