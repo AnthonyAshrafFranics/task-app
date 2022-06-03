@@ -10,7 +10,7 @@ import { Tasks } from "./components/Tasks";
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
-  const api = "http://localhost:5000/tasks";
+  const api = "https://tasks-managerr.herokuapp.com/tasks";
   useEffect(() => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks();
